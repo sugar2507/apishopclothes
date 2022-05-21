@@ -30,6 +30,7 @@ namespace ShopClothes.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+            
             string query = @"
                     select ID, NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,HOTPRODUCT,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,DESCRIPTION,IMAGE,COMPANY,IDCATEGORY,SEX from dbo.PRODUCTS";
             DataTable table = new DataTable();
@@ -54,6 +55,7 @@ namespace ShopClothes.Controllers
         [HttpPost]
         public JsonResult Post(PRODUCT prod)
         {
+           
             string query = @"
                     insert into dbo.PRODUCTS (NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,IMAGE,DESCRIPTION,COMPANY,IDCATEGORY,SEX) values 
                     (@NAME,@QUANTITY,@PRICE,@ORI_PRICE,@USD_PRICE,@CREATEBY,@CREATEAT,@UPDATEBY,@UPDATEAT,@IMAGE,@DESCRIPTION,@COMPANY,@IDCATEGORY,@SEX)
@@ -175,7 +177,7 @@ namespace ShopClothes.Controllers
 
             return new JsonResult("Deleted Successfully");
         }
-
+        
         [Route("SaveFile")]
         [HttpPost,DisableRequestSizeLimit]
         public IActionResult SaveFile()

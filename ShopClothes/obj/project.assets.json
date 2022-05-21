@@ -1359,19 +1359,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\navyc\\.nuget\\packages\\": {}
+    "C:\\Users\\Tuan Hai\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HUFLIT\\Angular\\ShopClothes\\api-shopclothes\\ShopClothes\\ShopClothes\\ShopClothes.csproj",
+      "projectUniqueName": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
       "projectName": "ShopClothes",
-      "projectPath": "D:\\HUFLIT\\Angular\\ShopClothes\\api-shopclothes\\ShopClothes\\ShopClothes\\ShopClothes.csproj",
-      "packagesPath": "C:\\Users\\navyc\\.nuget\\packages\\",
-      "outputPath": "D:\\HUFLIT\\Angular\\ShopClothes\\api-shopclothes\\ShopClothes\\ShopClothes\\obj\\",
+      "projectPath": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
+      "packagesPath": "C:\\Users\\Tuan Hai\\.nuget\\packages\\",
+      "outputPath": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\navyc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tuan Hai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1432,7 +1432,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
