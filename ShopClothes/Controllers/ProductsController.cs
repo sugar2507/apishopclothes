@@ -10,6 +10,7 @@ using System.Data;
 using ShopClothes.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace ShopClothes.Controllers
 {
@@ -29,6 +30,7 @@ namespace ShopClothes.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+            
             string query = @"
                     select ID, NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,HOTPRODUCT,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,DESCRIPTION,IMAGE,COMPANY,IDCATEGORY,SEX from dbo.PRODUCTS";
             DataTable table = new DataTable();
@@ -53,6 +55,7 @@ namespace ShopClothes.Controllers
         [HttpPost]
         public JsonResult Post(PRODUCT prod)
         {
+           
             string query = @"
                     insert into dbo.PRODUCTS (NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,IMAGE,DESCRIPTION,COMPANY,IDCATEGORY,SEX) values 
                     (@NAME,@QUANTITY,@PRICE,@ORI_PRICE,@USD_PRICE,@CREATEBY,@CREATEAT,@UPDATEBY,@UPDATEAT,@IMAGE,@DESCRIPTION,@COMPANY,@IDCATEGORY,@SEX)
@@ -202,28 +205,63 @@ namespace ShopClothes.Controllers
             return new JsonResult(table);
         }
         [Route("SaveFile")]
-        [HttpPost]
-        public JsonResult SaveFile()
+        [HttpPost,DisableRequestSizeLimit]
+        public IActionResult SaveFile()
         {
+            //var flie = Request.Form.Files[0];
+            //var folderName = Path.Combine("Photos");
+            //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+
+            //return new JsonResult(pathToSave);
+
             try
             {
-                var httpRequest = Request.Form;
-                var postedFile = httpRequest.Files[0];
-                string filename = postedFile.FileName;
-                var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Photos");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                if (file.Length > 0)
                 {
-                    postedFile.CopyTo(stream);
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    return Ok(new { dbPath });
                 }
-
-                return new JsonResult(filename);
+                else
+                {
+                    return BadRequest();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return new JsonResult("anonymous.png");
+                return StatusCode(500, $"Internal server error: {ex}");
             }
+
+
+            //try
+            //{
+            //    var httpRequest = Request.Form;
+            //    var postedFile = httpRequest.Files[0];
+            //    string filename = postedFile.FileName;
+            //    var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
+
+            //    using (var stream = new FileStream(physicalPath, FileMode.Create))
+            //    {
+            //        postedFile.CopyTo(stream);
+            //    }
+
+            //    return new JsonResult(filename);
+            //}
+            //catch (Exception)
+            //{
+
+            //    return new JsonResult("anonymous.png");
+            //}
         }
     }
 }

@@ -1,15 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +31,15 @@ namespace ShopClothes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDirectoryBrowser();
+
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+
             //Enable CORS
             services.AddCors(c =>
             {
@@ -42,7 +55,7 @@ namespace ShopClothes
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
                 = new DefaultContractResolver());
 
-
+           
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -64,11 +77,25 @@ namespace ShopClothes
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShopClothes v1"));
             }
-
+            app.UseStaticFiles();
+           
+            app.UseHttpsRedirection();
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
-            app.UseHttpsRedirection();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+             Path.Combine(Directory.GetCurrentDirectory(), "Photos")),
+                RequestPath = "/Photos",
+
+            });
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            // Path.Combine(Directory.GetCurrentDirectory(), "/Photos")),
+            //    RequestPath = new PathString("Photos"),
+            //});
 
             app.UseRouting();
 
