@@ -174,7 +174,33 @@ namespace ShopClothes.Controllers
 
             return new JsonResult("Deleted Successfully");
         }
+        [HttpGet("{id}")]
+        public JsonResult GetProductById(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where ID=@ID
+                            ";
 
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@ID", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
         [Route("SaveFile")]
         [HttpPost]
         public JsonResult SaveFile()
