@@ -194,3 +194,5 @@ D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.dll
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ref\ShopClothes.dll
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.pdb
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.genruntimeconfig.cache
+D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.Properties.Resources.resources
+D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.csproj.GenerateResource.cache
