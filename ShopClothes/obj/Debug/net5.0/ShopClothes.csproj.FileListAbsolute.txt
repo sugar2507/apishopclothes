@@ -1,3 +1,4 @@
+
 D:\HUFLIT\API.NET\ShopClothes\ShopClothes\bin\Debug\net5.0\appsettings.Development.json
 D:\HUFLIT\API.NET\ShopClothes\ShopClothes\bin\Debug\net5.0\appsettings.json
 D:\HUFLIT\API.NET\ShopClothes\ShopClothes\bin\Debug\net5.0\ShopClothes.exe

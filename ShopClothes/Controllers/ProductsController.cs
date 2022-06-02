@@ -100,7 +100,7 @@ namespace ShopClothes.Controllers
         {
          //   NAME,PRICE,ORI_PRICE,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,DESCRIPTION,IMAGE,COMPANY,IDCATEGORY,SEX
             string query = @"
-                           update dbo.CATEGORIES
+                           update dbo.PRODUCTS
                            set NAME = @NAME,
                                 QUANTITY = @QUANTITY,
                                 PRICE=@PRICE,
@@ -111,7 +111,7 @@ namespace ShopClothes.Controllers
                                 IDCATEGORY=@IDCATEGORY,
                                 SEX=@SEX,
                             CREATEBY = @CREATEBY,
-                            CREATEAT = @CREATEAT,
+                          
                             UPDATEBY = @UPDATEBY,
                             UPDATEAT = @UPDATEAT
                             where ID = @ID
@@ -128,10 +128,10 @@ namespace ShopClothes.Controllers
                     myCommand.Parameters.AddWithValue("@ID", prod.ID);
                     myCommand.Parameters.AddWithValue("@NAME", prod.NAME);
                     myCommand.Parameters.AddWithValue("@QUANTITY", prod.QUANTITY);
-                    myCommand.Parameters.AddWithValue("@CREATEAT", prod.CREATEAT);
+                    //myCommand.Parameters.AddWithValue("@CREATEAT", prod.CREATEAT);
                     myCommand.Parameters.AddWithValue("@CREATEBY", prod.CREATEBY ?? (object)DBNull.Value);
                     myCommand.Parameters.AddWithValue("@UPDATEBY", prod.UPDATEBY ?? (object)DBNull.Value);
-                    myCommand.Parameters.AddWithValue("@UPDATEAT", prod.UPDATEAT);
+                    myCommand.Parameters.AddWithValue("@UPDATEAT", DateTime.Now);
                     myCommand.Parameters.AddWithValue("@PRICE", prod.PRICE);
                     myCommand.Parameters.AddWithValue("@IMAGE", prod.IMAGE);
                     myCommand.Parameters.AddWithValue("@ORI_PRICE", prod.ORI_PRICE);
@@ -204,6 +204,37 @@ namespace ShopClothes.Controllers
 
             return new JsonResult(table);
         }
+
+
+        [Route("GetProductByCate/{id}")]
+        public JsonResult GetProductByCate(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where IDCATEGORY=@IDCATEGORY
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@IDCATEGORY", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
+
         [Route("SaveFile")]
         [HttpPost,DisableRequestSizeLimit]
         public IActionResult SaveFile()
