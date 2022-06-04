@@ -16,7 +16,7 @@ namespace ShopClothes.Models
     {
         public ORDER()
         {
-            this.BILLs = new HashSet<BILL>();
+          
             this.DE_ORDER = new HashSet<DE_ORDER>();
         }
     
@@ -28,7 +28,7 @@ namespace ShopClothes.Models
         public int STATUS { get; set; }
         public int METHODS { get; set; }
     
-        public virtual ICollection<BILL> BILLs { get; set; }
+      
         public virtual ICollection<DE_ORDER> DE_ORDER { get; set; }
     }
 }
