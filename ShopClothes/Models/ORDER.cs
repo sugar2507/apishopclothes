@@ -25,8 +25,7 @@ namespace ShopClothes.Models
         public int ORI_PRICE { get; set; }
         public double TOTALMONEY { get; set; }
         public string NOTE { get; set; }
-        public int STATUS { get; set; }
-        public int METHODS { get; set; }
+       
     
       
         public virtual ICollection<DE_ORDER> DE_ORDER { get; set; }
