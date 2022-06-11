@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ShopClothes.Models;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -46,8 +47,8 @@ namespace ShopClothes.Controllers
             public JsonResult Post(ORDER cp)
             {
                 string query = @"
-                    insert into dbo.ORDERS (ORI_PRICE,TOTALMONEY,DAY ,NOTE,METHODS) values 
-                    (@ID,@ORI_PRICE,@TOTALMONEY,@DATETIME,@NOTE,@METHODS)
+                    insert into dbo.ORDERS (ORI_PRICE,TOTALMONEY,DAY ,NOTE) values 
+                    (@ORI_PRICE,@TOTALMONEY,@DAY,@NOTE)
                     ";
                 DataTable table = new DataTable();
                 string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
@@ -57,13 +58,13 @@ namespace ShopClothes.Controllers
                     myCon.Open();
                     using (SqlCommand myCommand = new SqlCommand(query, myCon))
                     {
-                        myCommand.Parameters.AddWithValue("@ID", cp.ID);
+                       
                         myCommand.Parameters.AddWithValue("@ORI_PRICE", cp.ORI_PRICE);
                         myCommand.Parameters.AddWithValue("@TOTALMONEY", cp.TOTALMONEY);
-                        myCommand.Parameters.AddWithValue("@DAY ", cp.DAY);
+                        myCommand.Parameters.AddWithValue("@DAY ", DateTime.Now);
                         myCommand.Parameters.AddWithValue("@NOTE", cp.NOTE);
                       
-                        myCommand.Parameters.AddWithValue("@METHODS", cp.METHODS);
+                       
                         myReader = myCommand.ExecuteReader();
                         table.Load(myReader);
                         myReader.Close();
