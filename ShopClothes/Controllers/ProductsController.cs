@@ -234,7 +234,60 @@ namespace ShopClothes.Controllers
             return new JsonResult(table);
         }
 
+        [Route("GetProductByBranch/{id}")]
+        public JsonResult GetProductByBranch(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where COMPANY=@COMPANY
+                            ";
 
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@COMPANY", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+        [Route("GetProductBySex/{id}")]
+        public JsonResult GetProductBySex(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where SEX=@SEX
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@SEX", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
         [Route("SaveFile")]
         [HttpPost,DisableRequestSizeLimit]
         public IActionResult SaveFile()
