@@ -33,6 +33,7 @@ namespace ShopClothes.Models
         public Nullable<int> UPDATEBY { get; set; }
         public Nullable<System.DateTime> UPDATEAT { get; set; }
         public string IMAGE { get; set; }
+        public string SIZE { get; set; }
         public int COMPANY { get; set; }
         public Nullable<int> IDCATEGORY { get; set; }
         public int SEX { get; set; }
@@ -42,5 +43,6 @@ namespace ShopClothes.Models
         public virtual ICollection<DE_ORDER> DE_ORDER { get; set; }
         public virtual ICollection<DETAIL_PRODUCT> DETAIL_PRODUCT { get; set; }
         public virtual SEX SEX1 { get; set; }
+        public virtual SIZE SIZE1 { get; set; }
     }
 }

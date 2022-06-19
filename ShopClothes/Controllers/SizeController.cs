@@ -26,7 +26,7 @@ namespace ShopClothes.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select ID, Name from dbo.SIZE";
+                    select ID, NAME from dbo.SIZE";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
             SqlDataReader myReader;
@@ -103,7 +103,33 @@ namespace ShopClothes.Controllers
 
             return new JsonResult("Updated Successfully");
         }
+        [Route("GetSizeById/{id}")]
+        public JsonResult GetProductByCate(int id)
+        {
+            string query = @"
+                           select * from dbo.SIZE
+                            where ID=@ID
+                            ";
 
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@ID", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
 
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
