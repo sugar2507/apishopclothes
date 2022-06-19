@@ -152,7 +152,6 @@ D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ShopClothes.deps.json
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ShopClothes.runtimeconfig.json
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ShopClothes.runtimeconfig.dev.json
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ShopClothes.dll
-D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ref\ShopClothes.dll
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\ShopClothes.pdb
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\Github\apishopclothes\ShopClothes\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
@@ -186,7 +185,6 @@ D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.csproj.CoreCom
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.MvcApplicationPartsAssemblyInfo.cs
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.MvcApplicationPartsAssemblyInfo.cache
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\staticwebassets\ShopClothes.StaticWebAssets.Manifest.cache
-D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\staticwebassets\ShopClothes.StaticWebAssets.xml
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\scopedcss\bundle\ShopClothes.styles.css
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.RazorTargetAssemblyInfo.cache
 D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.csproj.CopyComplete
@@ -247,3 +245,4 @@ H:\DA\ShopClothAPI\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.Razor
 H:\DA\ShopClothAPI\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.csproj.CopyComplete
 H:\DA\ShopClothAPI\apishopclothes\ShopClothes\obj\Debug\net5.0\ShopClothes.genruntimeconfig.cache
 H:\DA\ShopClothAPI\apishopclothes\ShopClothes\obj\Debug\net5.0\ref\ShopClothes.dll
+D:\Github\apishopclothes\ShopClothes\obj\Debug\net5.0\refint\ShopClothes.dll

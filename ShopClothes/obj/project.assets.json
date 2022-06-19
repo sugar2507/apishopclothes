@@ -1359,19 +1359,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tuan Hai\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
+      "projectUniqueName": "D:\\Github\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
       "projectName": "ShopClothes",
-      "projectPath": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
-      "packagesPath": "C:\\Users\\Tuan Hai\\.nuget\\packages\\",
-      "outputPath": "H:\\DA\\ShopClothAPI\\apishopclothes\\ShopClothes\\obj\\",
+      "projectPath": "D:\\Github\\apishopclothes\\ShopClothes\\ShopClothes.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\apishopclothes\\ShopClothes\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Tuan Hai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1432,7 +1436,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
