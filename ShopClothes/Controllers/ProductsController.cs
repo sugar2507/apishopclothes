@@ -57,8 +57,8 @@ namespace ShopClothes.Controllers
         {
            
             string query = @"
-                    insert into dbo.PRODUCTS (NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,IMAGE,DESCRIPTION,COMPANY,IDCATEGORY,SEX) values 
-                    (@NAME,@QUANTITY,@PRICE,@ORI_PRICE,@USD_PRICE,@CREATEBY,@CREATEAT,@UPDATEBY,@UPDATEAT,@IMAGE,@DESCRIPTION,@COMPANY,@IDCATEGORY,@SEX)
+                    insert into dbo.PRODUCTS (NAME,QUANTITY,PRICE,ORI_PRICE,USD_PRICE,CREATEBY,CREATEAT,UPDATEBY,UPDATEAT,IMAGE,DESCRIPTION,COMPANY,IDCATEGORY,SEX,SIZE) values 
+                    (@NAME,@QUANTITY,@PRICE,@ORI_PRICE,@USD_PRICE,@CREATEBY,@CREATEAT,@UPDATEBY,@UPDATEAT,@IMAGE,@DESCRIPTION,@COMPANY,@IDCATEGORY,@SEX,@SIZE)
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
@@ -83,7 +83,7 @@ namespace ShopClothes.Controllers
                     myCommand.Parameters.AddWithValue("@IDCATEGORY", prod.IDCATEGORY);
                     myCommand.Parameters.AddWithValue("@SEX", prod.SEX);
 
-
+                    myCommand.Parameters.AddWithValue("@SIZE", prod.SIZE);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -110,6 +110,7 @@ namespace ShopClothes.Controllers
                                 COMPANY=@COMPANY,
                                 IDCATEGORY=@IDCATEGORY,
                                 SEX=@SEX,
+SIZE=@SIZE
                             CREATEBY = @CREATEBY,
                           
                             UPDATEBY = @UPDATEBY,
@@ -139,7 +140,7 @@ namespace ShopClothes.Controllers
                     myCommand.Parameters.AddWithValue("@COMPANY", prod.COMPANY);
                     myCommand.Parameters.AddWithValue("@IDCATEGORY", prod.IDCATEGORY);
                     myCommand.Parameters.AddWithValue("@SEX", prod.SEX);
-
+                    myCommand.Parameters.AddWithValue("@SIZE", prod.SIZE);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -234,7 +235,60 @@ namespace ShopClothes.Controllers
             return new JsonResult(table);
         }
 
+        [Route("GetProductByBranch/{id}")]
+        public JsonResult GetProductByBranch(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where COMPANY=@COMPANY
+                            ";
 
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@COMPANY", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+        [Route("GetProductBySex/{id}")]
+        public JsonResult GetProductBySex(int id)
+        {
+            string query = @"
+                           select * from dbo.PRODUCTS
+                            where SEX=@SEX
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("ShopClothes");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@SEX", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
         [Route("SaveFile")]
         [HttpPost,DisableRequestSizeLimit]
         public IActionResult SaveFile()

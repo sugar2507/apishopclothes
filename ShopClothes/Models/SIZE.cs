@@ -17,11 +17,13 @@ namespace ShopClothes.Models
         public SIZE()
         {
             this.DETAIL_PRODUCT = new HashSet<DETAIL_PRODUCT>();
+            this.PRODUCTS = new HashSet<PRODUCT>();
         }
     
         public int ID { get; set; }
         public string NAME { get; set; }
     
         public virtual ICollection<DETAIL_PRODUCT> DETAIL_PRODUCT { get; set; }
+        public virtual ICollection<PRODUCT> PRODUCTS { get; set; }
     }
 }
